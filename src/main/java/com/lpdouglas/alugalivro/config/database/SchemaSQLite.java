@@ -26,6 +26,7 @@ public class SchemaSQLite implements ApplicationRunner {
                 "nome VARCHAR(50)," +
                 "autor VARCHAR(50)," +
                 "alugado INTEGER," +
+                "detalhes VARCHAR(250)," +
                 "CONSTRAINT livro_pk PRIMARY KEY (id)" +
                 ")");
     }
