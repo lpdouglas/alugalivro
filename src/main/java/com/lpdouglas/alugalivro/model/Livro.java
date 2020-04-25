@@ -14,4 +14,5 @@ public class Livro {
     private String nome;
     private String autor;
     private Boolean alugado = false;
+    private String detalhes;
 }

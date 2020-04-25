@@ -1,14 +1,12 @@
 package com.lpdouglas.alugalivro.controller;
 
 import com.lpdouglas.alugalivro.dto.LivroDto;
-import com.lpdouglas.alugalivro.model.Livro;
+import com.lpdouglas.alugalivro.dto.LivroSimpleOutput;
 import com.lpdouglas.alugalivro.service.LivrosServices;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -17,56 +15,54 @@ public class LivrosController {
     @Autowired
     LivrosServices livrosServices;
 
-    ModelMapper modelMapper = new ModelMapper();
-
     @GetMapping("/livros")
-    public List<LivroDto> getLivros(){
-        List<Livro> livros = livrosServices.getLivros();
-
-        LivroDto[] livrosDto = modelMapper.map(livros, LivroDto[].class);
-
-        return Arrays.asList(livrosDto);
+    public List<LivroSimpleOutput> getLivros(@RequestParam(required = false) String search){
+        List<LivroSimpleOutput> livros = livrosServices.getLivros(search);
+        return livros;
     }
 
     @GetMapping("/livros/{id}")
     public LivroDto getLivro(@PathVariable("id") String id){
 
-        Livro livro = livrosServices.getLivro(id);
+        LivroDto livro = livrosServices.getLivro(id);
 
-        LivroDto livroDto = (livro != null) ? modelMapper.map(livro, LivroDto.class) : null;
-
-        return livroDto;
+        return livro;
     }
 
     @PostMapping("/livros")
     public LivroDto postLivro(@Valid  @RequestBody LivroDto livroInput){
 
-        Livro livroEntity = modelMapper.map(livroInput, Livro.class);
+        LivroDto livro = livrosServices.insertLivro(livroInput);
 
-        Livro livro = livrosServices.insertLivro(livroEntity);
-
-        LivroDto livroOutput = (livro != null) ? modelMapper.map(livro, LivroDto.class) : null;
-
-        return livroOutput;
+        return livro;
     }
 
     @PutMapping("/livros/{id}")
     public Boolean putLivro(@PathVariable String id, @RequestBody LivroDto livroInput){
 
         livroInput.setId(id);
-        Livro livroEntity = modelMapper.map(livroInput, Livro.class);
 
-        boolean response = livrosServices.updateLivro(livroEntity);
+        livrosServices.updateLivro(livroInput);
 
-        return response;
+        return true;
     }
 
     @DeleteMapping("/livros/{id}")
-    public boolean DeleteLivro(@PathVariable("id") String id){
-
-        boolean response = livrosServices.deleteLivro(id);
-
-        return response;
+    public boolean deleteLivro(@PathVariable("id") String id){
+        livrosServices.deleteLivro(id);
+        return true;
     }
+
+    @PostMapping("/livros/{id}/alugar")
+    public boolean alugarLivro(@PathVariable("id") String id){
+        livrosServices.alugarLivro(id);
+        return true;
+    }
+
+//    @PostMapping("/livros/{id}/devolver")
+//    public boolean devolverLivro(@PathVariable("id") String id){
+//        livrosServices.devolverLivro(id);
+//        return true;
+//    }
 
 }

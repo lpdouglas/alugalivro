@@ -4,26 +4,22 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LivroDto {
-
+public class LivroSimpleOutput {
+    
     private String id;
 
     @NotNull
     @Length(max = 50)
     private String nome;
 
-    @Length(max = 50)
+    @Length(max = 50
+    )
     private String autor;
 
-    private Boolean alugado = false;
-
-    @Length(max = 250)
-    private String detalhes;
 }

@@ -1,79 +1,89 @@
 package com.lpdouglas.alugalivro.service;
 
-import com.lpdouglas.alugalivro.model.Livro;
+import com.lpdouglas.alugalivro.dto.LivroDto;
+import com.lpdouglas.alugalivro.dto.LivroSimpleOutput;
+import com.lpdouglas.alugalivro.repository.LivroRepository;
 import com.lpdouglas.alugalivro.validation.LivroValidation;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 @Service
 public class LivrosServices {
 
-    List<Livro> livros = new ArrayList<>(Arrays.asList(
-            Livro.builder().id("id_8000").nome("A revolta de Atlas").alugado(false).build(),
-            Livro.builder().id("sasfdfjsdn").nome("Não sei Lidar").autor("Fresno").alugado(false).build(),
-            Livro.builder().id("posdiposdjf").nome("50 Tons de Cinza").alugado(false).build(),
-            Livro.builder().id("soidfosidnfoi").nome("A anatomia do estado").autor("Rothbard").alugado(false).build()
-    ));
+    @Autowired
+    LivroRepository livroRepository;
 
-    public List<Livro> getLivros(){
-        return livros;
-    }
+    ModelMapper modelMapper = new ModelMapper();
 
-    public Livro getLivro(String id) {
-        Livro livro = null;
+    public List<LivroSimpleOutput> getLivros(String search){
+        List<LivroDto> livros = livroRepository.find(search);
+        List<LivroSimpleOutput> livrosSimple = new ArrayList<>();
 
-        for (Livro livroItem : livros) {
-            if (livroItem.getId().equals(id)){
-                livro = livroItem;
-            }
+        for (LivroDto livro:
+             livros) {
+            livrosSimple.add( modelMapper.map(livro, LivroSimpleOutput.class) );
         }
 
-        if (livro==null) {
+        return livrosSimple;
+    }
+
+    public LivroDto getLivro(String id) {
+        LivroDto livro = livroRepository.findById(id);
+
+        if (livro == null) {
             throw new Error("Não existe livro com o ID ".concat(id));
         }
 
         return livro;
     }
 
-    public Livro insertLivro(Livro livro) {
-        LivroValidation.validate(livro);
+    public LivroDto insertLivro(LivroDto livro) {
+        LivroValidation.schema(livro);
 
-        livro.setId("id_" + livros.size());
 
-        livros.add(livro);
-        return livro;
+        LivroDto livroSaved = livroRepository.save(livro);
+
+        return livroSaved;
     }
 
-    public boolean updateLivro(Livro livro) {
-        boolean isUpdated = false;
-
-        for (Livro livroItem : livros) {
-            if (livroItem.getId().equals(livro.getId())){
-                livroItem.setNome(livro.getNome());
-                livroItem.setAutor(livro.getAutor());
-                livroItem.setAlugado(livro.getAlugado());
-                isUpdated = true;
-            }
-        }
-        return isUpdated;
+//    public boolean updateLivro(LivroDto livro) {
+//        boolean isUpdated = false;
+//
+//        for (Livro livroItem : livros) {
+//            if (livroItem.getId().equals(livro.getId())){
+//                livroItem.setNome(livro.getNome());
+//                livroItem.setAutor(livro.getAutor());
+//                livroItem.setAlugado(livro.getAlugado());
+//                isUpdated = true;
+//            }
+//        }
+//        return isUpdated;
+//    }
+//
+    public void deleteLivro(String id) {
+        livroRepository.delete(id);
     }
 
-    public boolean deleteLivro(String id) {
-        Livro livroToDelete = null;
-
-        for (Livro livroItem : livros) {
-            if (livroItem.getId().equals(id)){
-                LivroValidation.delete(livroItem);
-                livroToDelete = livroItem;
-            }
-        }
-        livros.remove(livroToDelete);
-
-        return livroToDelete!=null;
+    public void updateLivro(LivroDto livroDto) {
+        livroRepository.update(livroDto);
     }
 
+    public void alugarLivro(String id) {
+        LivroDto livroDto = new LivroDto();
+        livroDto.setId(id);
+        livroDto.setAlugado(true);
+        livroRepository.update(livroDto);
+    }
+
+//    public void devolverLivro(String id) {
+//        LivroDto livroDto = new LivroDto();
+//        livroDto.setId(id);
+//        livroDto.setAlugado(false);
+//        livroRepository.update(livroDto);
+//    }
 }
