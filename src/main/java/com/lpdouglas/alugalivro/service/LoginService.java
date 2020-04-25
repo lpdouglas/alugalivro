@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
-    public boolean signIn(String email, String senha) {
-        return (email != null);
+    public boolean signIn(String email, String password) {
+        return (email != null && password != null);
     }
 }

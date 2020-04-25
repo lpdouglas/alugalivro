@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "session.user",
+      "type": "java.lang.String",
+      "description": "STRING contendo constant para especificar o campo user da sessão."
+    }
+  ]
+}
