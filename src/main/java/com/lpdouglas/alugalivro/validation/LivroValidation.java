@@ -2,7 +2,6 @@ package com.lpdouglas.alugalivro.validation;
 
 import com.lpdouglas.alugalivro.dto.LivroDto;
 import com.lpdouglas.alugalivro.exception.LivroException;
-import com.lpdouglas.alugalivro.model.Livro;
 
 public class LivroValidation {
     public static void schema(LivroDto livro){
@@ -20,12 +19,12 @@ public class LivroValidation {
     }
 
     public static void delete(LivroDto livro){
-        if (livro.getAlugado() == true) {
+        if (livro.getAlugado()) {
             throw new LivroException("Um livro que está alugado não pode ser deletado");
         }
     }
     public static void update(LivroDto livro){
-        if (livro.getAlugado() == true) {
+        if (livro.getAlugado()) {
             throw new LivroException("Um livro que está alugado não pode ser atualizado");
         }
     }

@@ -5,7 +5,6 @@ import com.lpdouglas.alugalivro.dto.LivroSimpleOutput;
 import com.lpdouglas.alugalivro.repository.LivroRepository;
 import com.lpdouglas.alugalivro.validation.LivroValidation;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,10 +14,14 @@ import java.util.List;
 @Service
 public class LivrosServices {
 
-    @Autowired
+    final
     LivroRepository livroRepository;
 
-    ModelMapper modelMapper = new ModelMapper();
+    final ModelMapper modelMapper = new ModelMapper();
+
+    public LivrosServices(LivroRepository livroRepository) {
+        this.livroRepository = livroRepository;
+    }
 
     public List<LivroSimpleOutput> getLivros(String search){
         List<LivroDto> livros = livroRepository.find(search);
@@ -46,25 +49,9 @@ public class LivrosServices {
         LivroValidation.schema(livro);
 
 
-        LivroDto livroSaved = livroRepository.save(livro);
-
-        return livroSaved;
+        return livroRepository.save(livro);
     }
 
-//    public boolean updateLivro(LivroDto livro) {
-//        boolean isUpdated = false;
-//
-//        for (Livro livroItem : livros) {
-//            if (livroItem.getId().equals(livro.getId())){
-//                livroItem.setNome(livro.getNome());
-//                livroItem.setAutor(livro.getAutor());
-//                livroItem.setAlugado(livro.getAlugado());
-//                isUpdated = true;
-//            }
-//        }
-//        return isUpdated;
-//    }
-//
     public void deleteLivro(String id) {
         livroRepository.delete(id);
     }

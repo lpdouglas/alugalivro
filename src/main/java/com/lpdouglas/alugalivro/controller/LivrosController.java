@@ -3,7 +3,6 @@ package com.lpdouglas.alugalivro.controller;
 import com.lpdouglas.alugalivro.dto.LivroDto;
 import com.lpdouglas.alugalivro.dto.LivroSimpleOutput;
 import com.lpdouglas.alugalivro.service.LivrosServices;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,51 +11,47 @@ import java.util.List;
 @RestController
 public class LivrosController {
 
-    @Autowired
+    final
     LivrosServices livrosServices;
+
+    public LivrosController(LivrosServices livrosServices) {
+        this.livrosServices = livrosServices;
+    }
 
     @GetMapping("/livros")
     public List<LivroSimpleOutput> getLivros(@RequestParam(required = false) String search){
-        List<LivroSimpleOutput> livros = livrosServices.getLivros(search);
-        return livros;
+        return livrosServices.getLivros(search);
     }
 
     @GetMapping("/livros/{id}")
     public LivroDto getLivro(@PathVariable("id") String id){
 
-        LivroDto livro = livrosServices.getLivro(id);
-
-        return livro;
+        return livrosServices.getLivro(id);
     }
 
     @PostMapping("/livros")
     public LivroDto postLivro(@Valid  @RequestBody LivroDto livroInput){
 
-        LivroDto livro = livrosServices.insertLivro(livroInput);
-
-        return livro;
+        return livrosServices.insertLivro(livroInput);
     }
 
     @PutMapping("/livros/{id}")
-    public Boolean putLivro(@PathVariable String id, @RequestBody LivroDto livroInput){
-
+    public String putLivro(@PathVariable String id, @RequestBody LivroDto livroInput){
         livroInput.setId(id);
-
         livrosServices.updateLivro(livroInput);
-
-        return true;
+        return "Livro atualizado";
     }
 
     @DeleteMapping("/livros/{id}")
-    public boolean deleteLivro(@PathVariable("id") String id){
+    public String deleteLivro(@PathVariable("id") String id){
         livrosServices.deleteLivro(id);
-        return true;
+        return "Livro deletado";
     }
 
     @PostMapping("/livros/{id}/alugar")
-    public boolean alugarLivro(@PathVariable("id") String id){
+    public String alugarLivro(@PathVariable("id") String id){
         livrosServices.alugarLivro(id);
-        return true;
+        return "Livro alugado";
     }
 
 //    @PostMapping("/livros/{id}/devolver")

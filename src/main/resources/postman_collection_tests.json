@@ -157,7 +157,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"lpdouglas@mail.com\"\n}",
+							"raw": "{\n\t\"email\": \"lpdouglas@live.com\",\n\t\"password\": \"D0(g!2s\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -572,21 +572,21 @@
 	],
 	"variable": [
 		{
-			"id": "2e4ebaed-123a-4dbc-947f-b4dc19665827",
+			"id": "026e4018-df11-4eea-bea4-9467c5196d07",
 			"key": "url",
 			"value": "localhost:8000",
 			"type": "string"
 		},
 		{
-			"id": "9bcb7db3-f6a4-4143-9bfe-343da6772be2",
+			"id": "c3ac7bb8-bbb1-44c0-bead-087ef146afd5",
 			"key": "livroId",
-			"value": "397febb9-d643-4d02-a8ae-759b7e600760",
+			"value": "592cd086-9934-4501-b8d2-a72cd7916e96",
 			"type": "string"
 		},
 		{
-			"id": "a9de98dc-678d-44b9-9fb6-db85b29af46f",
+			"id": "ca628a04-674f-4fe3-a4e4-d64e8224c4a9",
 			"key": "livroAlugadoId",
-			"value": "8d65bd29-8bd6-44c7-95bd-eaa09394185c",
+			"value": "5923fab8-85ce-46b8-9511-679389e3d88d",
 			"type": "string"
 		}
 	],

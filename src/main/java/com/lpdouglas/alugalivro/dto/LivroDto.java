@@ -1,10 +1,8 @@
 package com.lpdouglas.alugalivro.dto;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
 @Data

@@ -1,7 +1,6 @@
 package com.lpdouglas.alugalivro.handler;
 
 import com.lpdouglas.alugalivro.exception.LivroException;
-import com.lpdouglas.alugalivro.exception.UserException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

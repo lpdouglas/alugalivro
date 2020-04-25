@@ -5,7 +5,6 @@ import com.lpdouglas.alugalivro.exception.LivroException;
 import com.lpdouglas.alugalivro.model.Livro;
 import com.lpdouglas.alugalivro.validation.LivroValidation;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -17,10 +16,14 @@ import java.util.UUID;
 @Repository
 public class LivroRepository {
 
-    @Autowired
+    final
     JdbcTemplate jdbcTemplate;
 
-    ModelMapper modelMapper = new ModelMapper();
+    final ModelMapper modelMapper = new ModelMapper();
+
+    public LivroRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public LivroDto save(LivroDto livroDto){
         livroDto.setId(UUID.randomUUID().toString());
@@ -44,16 +47,14 @@ public class LivroRepository {
         return find(search, List.of("id", "nome", "autor", "alugado"));
     }
 
-    public List<LivroDto> find(String search, List fields){
-        List<LivroDto> livroDtos = findLivros(fields, (search!=null && !search.isBlank()) ? "nome LIKE '%"+search+"%' OR autor LIKE '%"+search+"%'" : null);
-        return livroDtos;
+    public List<LivroDto> find(String search, List<String> fields){
+        return findLivros(fields, (search!=null && !search.isBlank()) ? "nome LIKE '%"+search+"%' OR autor LIKE '%"+search+"%'" : null);
     }
 
     public LivroDto findById(String id){
         List<LivroDto> livros = findLivros(null, "id = '".concat(id).concat("'"));
         if (livros.size() == 0) throw new LivroException(String.format("O livro %s não existe", id));
-        LivroDto livro = livros.get(0);
-        return livro;
+        return livros.get(0);
     }
 
     private List<LivroDto> findLivros(List<String> fields, String where){
@@ -61,7 +62,6 @@ public class LivroRepository {
         String colums = fields!=null ? String.join(", ", fields) : "*";
 
         if (where == null) {
-            System.out.println("--------------COLUMS: "+colums);
             mapLivros = jdbcTemplate.queryForList("SELECT "+colums+" FROM livro");
         } else {
             mapLivros = jdbcTemplate.queryForList("SELECT "+colums+" FROM livro WHERE "+where);
@@ -82,7 +82,7 @@ public class LivroRepository {
         return livros;
     }
 
-    public boolean delete(String id){
+    public void delete(String id){
         List<LivroDto> livros = findLivros(null, "id = '".concat(id).concat("'"));
 
         if (livros.size() == 0) throw new LivroException(String.format("O livro %s não existe", id));
@@ -93,10 +93,9 @@ public class LivroRepository {
 
         jdbcTemplate.execute("DELETE FROM livro WHERE id = '"+id+"'");
 
-        return true;
     }
 
-    public boolean update(LivroDto livroDto){
+    public void update(LivroDto livroDto){
         List<LivroDto> livros = findLivros(null, "id = '".concat(livroDto.getId()).concat("'"));
 
         if (livros.size() == 0) throw new LivroException(String.format("O livro %s não existe", livroDto.getId()));
@@ -119,7 +118,6 @@ public class LivroRepository {
                 "detalhes = '" + newLivro.getDetalhes() + "' " +
                 "  WHERE id = '"+ newLivro.getId()+"'");
 
-        return true;
     }
 
 }
