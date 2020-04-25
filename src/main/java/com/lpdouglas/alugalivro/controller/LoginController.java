@@ -1,6 +1,7 @@
 package com.lpdouglas.alugalivro.controller;
 
 import com.lpdouglas.alugalivro.dto.LoginDto;
+import com.lpdouglas.alugalivro.exception.InvalidUserException;
 import com.lpdouglas.alugalivro.model.UserSession;
 import com.lpdouglas.alugalivro.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,6 @@ public class LoginController {
 
     @GetMapping("/session")
     public UserSession getSessionUser(HttpSession session) {
-//        System.out.println("SESSON: " + "" + " maxInterval: "+ session.getMaxInactiveInterval());
         return (UserSession) session.getAttribute(SESSION_USER);
     }
 
