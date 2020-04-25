@@ -1,4 +1,4 @@
-package com.lpdouglas.alugalivro.models;
+package com.lpdouglas.alugalivro.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

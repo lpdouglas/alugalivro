@@ -1,12 +1,13 @@
-package com.lpdouglas.alugalivro.controllers;
+package com.lpdouglas.alugalivro.controller;
 
 import com.lpdouglas.alugalivro.dto.LivroDto;
-import com.lpdouglas.alugalivro.models.Livro;
-import com.lpdouglas.alugalivro.services.LivrosServices;
+import com.lpdouglas.alugalivro.model.Livro;
+import com.lpdouglas.alugalivro.service.LivrosServices;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class LivrosController {
     }
 
     @PostMapping("/livros")
-    public LivroDto postLivro(@RequestBody LivroDto livroInput){
+    public LivroDto postLivro(@Valid  @RequestBody LivroDto livroInput){
 
         Livro livroEntity = modelMapper.map(livroInput, Livro.class);
 
