@@ -1,7 +1,7 @@
-package com.lpdouglas.alugalivro.services;
+package com.lpdouglas.alugalivro.service;
 
-import com.lpdouglas.alugalivro.models.Livro;
-import com.lpdouglas.alugalivro.validations.LivroValidation;
+import com.lpdouglas.alugalivro.model.Livro;
+import com.lpdouglas.alugalivro.validation.LivroValidation;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

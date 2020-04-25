@@ -1,6 +1,6 @@
-package com.lpdouglas.alugalivro.validations;
+package com.lpdouglas.alugalivro.validation;
 
-import com.lpdouglas.alugalivro.models.Livro;
+import com.lpdouglas.alugalivro.model.Livro;
 
 public class LivroValidation {
     public static void validate(Livro livro){
