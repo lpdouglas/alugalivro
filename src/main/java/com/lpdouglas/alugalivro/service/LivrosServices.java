@@ -1,7 +1,9 @@
 package com.lpdouglas.alugalivro.service;
 
 import com.lpdouglas.alugalivro.model.Livro;
+import com.lpdouglas.alugalivro.repository.LivroRepository;
 import com.lpdouglas.alugalivro.validation.LivroValidation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +21,13 @@ public class LivrosServices {
             Livro.builder().id("soidfosidnfoi").nome("A anatomia do estado").autor("Rothbard").alugado(false).build()
     ));
 
-    public List<Livro> getLivros(){
+    @Autowired
+    LivroRepository livroRepository;
+
+    public List<Livro> getLivros(String search){
+
+        List<Livro> livros = livroRepository.find(search);
+
         return livros;
     }
 
@@ -42,10 +50,12 @@ public class LivrosServices {
     public Livro insertLivro(Livro livro) {
         LivroValidation.validate(livro);
 
-        livro.setId("id_" + livros.size());
 
-        livros.add(livro);
-        return livro;
+        Livro livroSaved = livroRepository.save(livro);
+
+        livros.add(livroSaved);
+
+        return livroSaved;
     }
 
     public boolean updateLivro(Livro livro) {

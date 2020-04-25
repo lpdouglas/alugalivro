@@ -20,8 +20,8 @@ public class LivrosController {
     ModelMapper modelMapper = new ModelMapper();
 
     @GetMapping("/livros")
-    public List<LivroDto> getLivros(){
-        List<Livro> livros = livrosServices.getLivros();
+    public List<LivroDto> getLivros(@RequestParam(required = false) String search){
+        List<Livro> livros = livrosServices.getLivros(search);
 
         LivroDto[] livrosDto = modelMapper.map(livros, LivroDto[].class);
 
