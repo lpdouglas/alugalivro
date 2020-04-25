@@ -53,4 +53,16 @@ public class LivrosController {
         return true;
     }
 
+    @PostMapping("/livros/{id}/alugar")
+    public boolean alugarLivro(@PathVariable("id") String id){
+        livrosServices.alugarLivro(id);
+        return true;
+    }
+
+//    @PostMapping("/livros/{id}/devolver")
+//    public boolean devolverLivro(@PathVariable("id") String id){
+//        livrosServices.devolverLivro(id);
+//        return true;
+//    }
+
 }

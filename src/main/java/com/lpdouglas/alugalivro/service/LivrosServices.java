@@ -73,4 +73,17 @@ public class LivrosServices {
         livroRepository.update(livroDto);
     }
 
+    public void alugarLivro(String id) {
+        LivroDto livroDto = new LivroDto();
+        livroDto.setId(id);
+        livroDto.setAlugado(true);
+        livroRepository.update(livroDto);
+    }
+
+//    public void devolverLivro(String id) {
+//        LivroDto livroDto = new LivroDto();
+//        livroDto.setId(id);
+//        livroDto.setAlugado(false);
+//        livroRepository.update(livroDto);
+//    }
 }
