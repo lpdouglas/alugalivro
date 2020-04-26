@@ -2,6 +2,7 @@ package com.lpdouglas.alugalivro.service;
 
 import com.lpdouglas.alugalivro.dto.LivroDto;
 import com.lpdouglas.alugalivro.dto.LivroSimpleOutput;
+import com.lpdouglas.alugalivro.exception.LivroException;
 import com.lpdouglas.alugalivro.repository.LivroRepository;
 import com.lpdouglas.alugalivro.validation.LivroValidation;
 import org.modelmapper.ModelMapper;
@@ -12,14 +13,14 @@ import java.util.List;
 
 
 @Service
-public class LivrosServices {
+public class LivrosService {
 
     final
     LivroRepository livroRepository;
 
     final ModelMapper modelMapper = new ModelMapper();
 
-    public LivrosServices(LivroRepository livroRepository) {
+    public LivrosService(LivroRepository livroRepository) {
         this.livroRepository = livroRepository;
     }
 
@@ -39,7 +40,7 @@ public class LivrosServices {
         LivroDto livro = livroRepository.findById(id);
 
         if (livro == null) {
-            throw new Error("Não existe livro com o ID ".concat(id));
+            throw new LivroException("Não existe livro com o ID ".concat(id));
         }
 
         return livro;
@@ -47,7 +48,6 @@ public class LivrosServices {
 
     public LivroDto insertLivro(LivroDto livro) {
         LivroValidation.schema(livro);
-
 
         return livroRepository.save(livro);
     }

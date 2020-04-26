@@ -26,7 +26,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public boolean signIn(@Valid @RequestBody LoginDto login, HttpSession session){
-        if (!loginService.signIn(login.getEmail(), login.getPassword())) {
+        if (!loginService.login(login.getEmail(), login.getPassword())) {
             return false;
         }
 
