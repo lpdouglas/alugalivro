@@ -10,7 +10,7 @@ public class LivroValidation {
         }
 
         if (livro.getNome() == null) {
-            throw new Error("Livro deve ter nome");
+            throw new LivroException("Livro deve ter nome");
         }
 
         if (livro.getAutor() == null) {
