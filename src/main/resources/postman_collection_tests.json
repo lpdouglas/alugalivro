@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "067ec6d4-9d99-470f-880d-f1c7acc2690d",
-		"name": "LivroLocadora",
+		"_postman_id": "8060b4c7-77af-4596-ab39-9cff6023f76b",
+		"name": "AlugaLivro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -14,7 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "69a531b2-9b38-47e4-9371-395bed11fa98",
+								"id": "0b2b5929-3a59-4518-a00b-79f5d718130d",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -54,7 +54,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "3ee14765-7a9e-48e4-acc6-f0bf4b773213",
+								"id": "ca7d35d0-4909-4166-93ab-df8852b9e3f9",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -102,7 +102,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4177e5d9-ee2d-43e7-9736-c0c27becbe8b",
+								"id": "095ac174-0be7-4ddf-b8c0-54b733d9f952",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(400);",
@@ -142,7 +142,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "7a70c61b-f4c1-40dc-ab86-b05486230bda",
+								"id": "0337787e-b7f7-4a54-a6f7-b695fe40f866",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -188,7 +188,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "e1fa54db-e99f-4bb6-aeb7-daf5db7c232c",
+								"id": "eaaabe1f-0893-411a-9ff9-0665a4b119b4",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -232,7 +232,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c056afcc-bc4a-4f94-9b13-87b290d2b08d",
+								"id": "0757f57b-9d6d-4ec1-895b-b9816fd48c22",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -269,7 +269,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f47e0a1b-dfd0-4c22-8572-ca90260de7b2",
+								"id": "2e1e71a7-be0c-4581-8a8c-579ffaaf40dd",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -313,7 +313,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "0e895205-bf99-44ee-8a55-ac277d369035",
+								"id": "b54ebe58-3578-4411-9d2f-4f65a5198725",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -344,7 +344,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "829cf7e4-7164-44c2-bc75-36ec30d50f8f",
+								"id": "102a5b24-6c23-4701-8a8b-4f69e4611d88",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -381,7 +381,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "c2b743a7-f59e-4fce-9f30-f03c20d459df",
+								"id": "1d2bdf21-6bf5-4bf7-97fe-a392a267b695",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -413,7 +413,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "19343f00-4c8c-4725-b46e-18cefdff41fc",
+								"id": "6a03e47e-fac7-40cd-b0ae-36b4f2b0bb1a",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -454,7 +454,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "548e4512-e75f-4ea6-abe9-95123e9a422b",
+								"id": "2eb66bab-93c6-4ebe-8913-224db2257872",
 								"exec": [
 									"pm.test(\"Status code is 200\", function () {",
 									"    pm.response.to.have.status(200);",
@@ -486,7 +486,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "4e688835-b738-4f04-ae5d-6333d2f0f72e",
+								"id": "3c2f5669-60a6-4e27-b27f-761110ac2d9b",
 								"exec": [
 									"pm.test(\"Status code is 400\", function () {",
 									"    pm.response.to.have.status(400);",
@@ -518,7 +518,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "2b63d262-a800-457b-bc21-f6e815be55dd",
+								"id": "403b1971-c633-47cb-a193-1fa1b667bbf9",
 								"exec": [
 									"pm.test(\"Status code is 400\", function () {",
 									"    pm.response.to.have.status(400);",
@@ -552,7 +552,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "dd856cc3-ffd8-422d-99f5-0248fbf358f2",
+				"id": "6ea308c1-0d72-47ab-9898-e2071fcf7d80",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -562,7 +562,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "b313add1-0d7d-4d8b-a48f-a24c89b70b0d",
+				"id": "867a06e2-116d-407d-8cfb-96c0b7b45efb",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -572,19 +572,19 @@
 	],
 	"variable": [
 		{
-			"id": "026e4018-df11-4eea-bea4-9467c5196d07",
+			"id": "6caf3e1b-b641-4b12-9549-d68ec2977eb4",
 			"key": "url",
 			"value": "localhost:8000",
 			"type": "string"
 		},
 		{
-			"id": "c3ac7bb8-bbb1-44c0-bead-087ef146afd5",
+			"id": "6380773c-01cd-49d1-9de6-640a4fc99b79",
 			"key": "livroId",
 			"value": "592cd086-9934-4501-b8d2-a72cd7916e96",
 			"type": "string"
 		},
 		{
-			"id": "ca628a04-674f-4fe3-a4e4-d64e8224c4a9",
+			"id": "63ec018d-653b-4ba4-99c6-98574329a823",
 			"key": "livroAlugadoId",
 			"value": "5923fab8-85ce-46b8-9511-679389e3d88d",
 			"type": "string"
