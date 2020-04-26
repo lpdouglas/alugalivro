@@ -1,0 +1,594 @@
+{
+	"info": {
+		"_postman_id": "067ec6d4-9d99-470f-880d-f1c7acc2690d",
+		"name": "LivroLocadora",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Realiza login no sistema",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "69a531b2-9b38-47e4-9371-395bed11fa98",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"lpdouglas@live.com\",\n\t\"password\": \"D0ug#2s\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Conferir email logado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3ee14765-7a9e-48e4-acc6-f0bf4b773213",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/session",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deslogar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tenta realizar login sem passar o email válido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4177e5d9-ee2d-43e7-9736-c0c27becbe8b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"lpdoug.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reliza login para proceder testes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a70c61b-f4c1-40dc-ab86-b05486230bda",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"lpdouglas@live.com\",\n\t\"password\": \"D0(g!2s\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Livros",
+			"item": [
+				{
+					"name": "Cadastrar novo livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1fa54db-e99f-4bb6-aeb7-daf5db7c232c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if (pm.response.code < 400){",
+									"    pm.collectionVariables.set(\"livroId\", pm.response.json().id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"O Menino Maluquinho\",\r\n    \"autor\": \"Ziraldo\",\r\n    \"detalhes\": \"O Menino Maluquinho é uma série de histórias em quadrinhos brasileira criada pelo desenhista e cartunista Ziraldo. A revista foi baseada no livro infantil de mesmo nome publicado em 1980, que se tornou um fenômeno durante os anos de 1990 e 2000.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/livros",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alugar um livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c056afcc-bc4a-4f94-9b13-87b290d2b08d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if (pm.response.code < 400){",
+									"    pm.collectionVariables.set(\"livroAlugadoId\", pm.collectionVariables.get(\"livroId\"));",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/livros/{{livroId}}/alugar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros",
+								"{{livroId}}",
+								"alugar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar novo livro para realizar testes crud",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f47e0a1b-dfd0-4c22-8572-ca90260de7b2",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"if (pm.response.code < 400){",
+									"    pm.collectionVariables.set(\"livroId\", pm.response.json().id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Os 3 porquinhos\",\r\n    \"autor\": \"Disney\",\r\n    \"detalhes\": \"3 porquinhos fizeram casas de materiais diferentes, o lobo venho e destruiu duas, sobrando só a de tijolo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/livros",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exibir todos livros cadastrados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e895205-bf99-44ee-8a55-ac277d369035",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/livros",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pesquisar livros (search)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "829cf7e4-7164-44c2-bc75-36ec30d50f8f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/livros?search=3 porquinhos",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "3 porquinhos"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Exibir detalhes de um livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c2b743a7-f59e-4fce-9f30-f03c20d459df",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/livros/{{livroId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros",
+								"{{livroId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar um livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "19343f00-4c8c-4725-b46e-18cefdff41fc",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"os 300 porquinhos\",\r\n    \"autor\": \"VALDISNEY\",\r\n    \"detalhes\": \"3 porquinhos fizeram casas de materiais diferentes, o lobo venho e destruiu duas, sobrando só a de tijolo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/livros/{{livroId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros",
+								"{{livroId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar um livro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "548e4512-e75f-4ea6-abe9-95123e9a422b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/livros/{{livroId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros",
+								"{{livroId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tentar deletar livro já deletado (não existente)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4e688835-b738-4f04-ae5d-6333d2f0f72e",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/livros/{{livroId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros",
+								"{{livroId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tentar deletar livro alugado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2b63d262-a800-457b-bc21-f6e815be55dd",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/livros/{{livroAlugadoId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"livros",
+								"{{livroAlugadoId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "dd856cc3-ffd8-422d-99f5-0248fbf358f2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b313add1-0d7d-4d8b-a48f-a24c89b70b0d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "026e4018-df11-4eea-bea4-9467c5196d07",
+			"key": "url",
+			"value": "localhost:8000",
+			"type": "string"
+		},
+		{
+			"id": "c3ac7bb8-bbb1-44c0-bead-087ef146afd5",
+			"key": "livroId",
+			"value": "592cd086-9934-4501-b8d2-a72cd7916e96",
+			"type": "string"
+		},
+		{
+			"id": "ca628a04-674f-4fe3-a4e4-d64e8224c4a9",
+			"key": "livroAlugadoId",
+			"value": "5923fab8-85ce-46b8-9511-679389e3d88d",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
